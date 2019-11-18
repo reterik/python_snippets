@@ -396,3 +396,123 @@ def max_element_index(arr):
 t = max_element_index([5, 8, 9, 7, 10, 3, 0]) # 4
 
 print(t)
+
+
+#------------------------------------------------------------------------------------------#
+#max_n
+#Returns the n maximum elements from the provided list. If n is greater than or equal to the provided list's length, then return the original list (sorted in descending order).=
+
+#Use sorted() to sort the list, [:n] to get the specified number of elements. Omit the second argument, n, to get a one-element list.
+
+#------------------------------------------------------------------------------------------#
+
+def max_n(lst, n=1):
+  return sorted(lst, reverse=True)[:n]
+
+s = max_n([1, 2, 3]) # [3]
+t = max_n([1, 2, 3], 2) # [3,2]
+
+print(s)
+print(t)
+
+
+#------------------------------------------------------------------------------------------#
+#min_n
+#Returns the n minimum elements from the provided list. If n is greater than or equal to the provided list's length, then return the original list (sorted in ascending order).
+#Use sorted() to sort the list, [:n]to get the specified number of elements. Omit the second argument,n`, to get a one-element list.
+#------------------------------------------------------------------------------------------#
+
+def min_n(lst, n=1):
+  return sorted(lst, reverse=False)[:n]
+
+t = min_n([1, 2, 3]) # [1]
+s = min_n([1, 2, 3], 2) # [1,2]
+
+print(s)
+print(t)
+
+
+#------------------------------------------------------------------------------------------#
+#most_frequent
+#Returns the most frequent element in a list.
+
+#Use set(list) to get the unique values in the list combined with max() to find the element that has the most appearances.
+#------------------------------------------------------------------------------------------#
+
+def most_frequent(list):
+  return max(set(list), key = list.count)
+
+t = most_frequent([1,2,1,2,3,2,1,4,2]) #2
+
+print(t)
+
+#------------------------------------------------------------------------------------------#
+#none
+#Returns False if the provided function returns True for at least one element in the list, True otherwise.
+
+#Use all() and fn to check if fn returns False for all the elements in the list.
+#------------------------------------------------------------------------------------------#
+
+def none(lst, fn=lambda x: x):
+  return all(not fn(x) for x in lst)
+
+s = none([0, 1, 2, 0], lambda x: x >= 2 ) # False
+t = none([0, 0, 0]) # True
+
+print(s)
+print(t)
+
+#------------------------------------------------------------------------------------------#
+#offset
+#Moves the specified amount of elements to the end of the list.
+
+#Use lst[offset:] and lst[:offset] to get the two slices of the list and combine them before returning.
+#------------------------------------------------------------------------------------------#
+
+def offset(lst, offset):
+  return lst[offset:] + lst[:offset]
+
+s = offset([1, 2, 3, 4, 5], 2) # [3, 4, 5, 1, 2]
+t = offset([1, 2, 3, 4, 5], -2) # [4, 5, 1, 2, 3]
+
+print(s)
+print(t)
+
+#------------------------------------------------------------------------------------------#
+#sample
+#Returns a random element from an array.
+
+#Use randint() to generate a random number that corresponds to an index in the list, return the element at that index.
+#------------------------------------------------------------------------------------------#
+
+from random import randint
+
+def sample(lst):
+  return lst[randint(0, len(lst) - 1)]
+
+t = sample([3, 7, 9, 11]) # 9
+
+print(t)
+
+#------------------------------------------------------------------------------------------#
+#shuffle
+#Randomizes the order of the values of an list, returning a new list.
+
+#Uses the Fisher-Yates algorithm to reorder the elements of the list.
+#------------------------------------------------------------------------------------------#
+
+from copy import deepcopy
+
+def shuffle(lst):
+  temp_lst = deepcopy(lst)
+  m = len(temp_lst)
+  while (m):
+    m -= 1
+    i = randint(0, m)
+    temp_lst[m], temp_lst[i] = temp_lst[i], temp_lst[m]
+  return temp_lst
+
+foo = [1,2,3]
+t = shuffle(foo) # [2,3,1] , foo = [1,2,3]
+
+print(t)
